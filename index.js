@@ -88,16 +88,18 @@ async function run() {
             res.send(result);
         })
 
-
-
-
-
-
-
-
-
-
-
+        // add user from dashboard ===>>>>>>>
+        app.post('/add', async (req, res) => {
+            const data = req.body;
+            const filter = { email: data.email };
+            const isExist = await userCollection.findOne(filter);
+            if (isExist) {
+                res.send({ message: "AA" })
+            } else {
+                const result = await userCollection.insertOne(data);
+                res.send(result);
+            }
+        })
 
 
         // Send a ping to confirm a successful connection
